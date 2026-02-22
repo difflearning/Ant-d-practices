@@ -28,24 +28,25 @@ import {
 import {FloatButton, Button, Layout, Menu, theme, Flex, Space, Badge, Avatar, Card, Input, Form, Row, Col, Select, Progress } from 'antd';
 import '../styles/sidebar.css';  // import CSS here
 import Search from 'antd/es/transfer/search';
-
-import { Line } from "@ant-design/charts";
-
+import { Line } from '@ant-design/charts';
+import logo from "../assets/logo.png"; // adjust path if needed
+import av1 from "../assets/02.jpg"; // adjust path if needed
+import av2 from "../assets/03.jpg"; // adjust path if needed
 
 const { Header, Sider, Content } = Layout;
 const App = () => {
 
 
-    // Sample data: days on X-axis, performance on Y-axis
+    // Raw weekly performance data
   const rawData = [
-    { day: "Mon", theory: 50, practice: 30, lexicon: 20 },
-    { day: "Tue", theory: 60, practice: 40, lexicon: 25 },
-    { day: "Wed", theory: 55, practice: 45, lexicon: 30 },
-    { day: "Thu", theory: 70, practice: 50, lexicon: 35 },
-    { day: "Fri", theory: 65, practice: 55, lexicon: 40 },
+    { day: "Mon", theory: 60, practice: 40, lexicon: 25 },
+    { day: "Tue", theory: 65, practice: 45, lexicon: 30 },
+    { day: "Wed", theory: 70, practice: 50, lexicon: 35 },
+    { day: "Thu", theory: 75, practice: 55, lexicon: 40 },
+    { day: "Fri", theory: 80, practice: 60, lexicon: 45 },
   ];
 
-  // Transform data for Ant Design Charts (long format)
+  // Convert to long format (required for multiple lines)
   const data = [];
   rawData.forEach((d) => {
     data.push({ day: d.day, type: "Theory", value: d.theory });
@@ -58,10 +59,46 @@ const App = () => {
     xField: "day",
     yField: "value",
     seriesField: "type",
-    smooth: true, // smooth lines
-    area: {}, // adds area under lines
-    legend: { position: "top" },
-    color: ["#1890ff", "#52c41a", "#fa8c16"], // optional custom colors
+
+    smooth: true,
+
+    // 👇 Area under the line
+    area: {
+      style: {
+        fillOpacity: 0.12, // light & clean
+      },
+    },
+
+    // 👇 Thin line ABOVE the area
+    lineStyle: {
+      lineWidth: 1.4,
+    },
+
+    // Optional dots on lines
+    point: {
+      size: 3,
+    },
+
+    color: ["#1677ff", "#52c41a", "#fa8c16"],
+
+    yAxis: {
+      min: 0,
+      max: 100,
+      title: {
+        text: "Performance (%)",
+      },
+    },
+
+    legend: {
+      position: "top",
+    },
+
+    tooltip: {
+      formatter: (datum) => ({
+        name: datum.type,
+        value: `${datum.value}%`,
+      }),
+    },
   };
 
   const [friends, setFriends] = useState([]);
@@ -90,16 +127,17 @@ const App = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
   return (
-    <Layout style={{height:"100vh"}}>
+    <Layout  style={{minHeight:'100dvh',  background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"}} >
 
 
 <Sider
+
   width={80}
   collapsedWidth={64}
   collapsible
   collapsed={collapsed}
   trigger={null}
-  style={{ background: '#fff' }}
+  style={{ background: 'transparent' }}
 >
   <Flex
     vertical
@@ -109,7 +147,7 @@ const App = () => {
   >
     {/* 🔝 Logo */}
     <div className="logo">
-      <img src="/logo.png" alt="logo" style={{ width: 32 }} />
+      <img src={logo} alt="logo" style={{ width: 44 }} />
     </div>
 
     {/* 📌 Main icons */}
@@ -134,64 +172,47 @@ const App = () => {
 
 </Sider>
 
-      <Layout>
-        <Header     style={{
-    padding: 0,
-    background: colorBgContainer,
-    display: 'flex',
-    alignItems: 'center',          // vertical center
-    justifyContent: 'space-between', // space between collapse and buttons
-    paddingLeft: '12px',           // optional: some left padding
-    paddingRight: '12px',          // optional: some right padding
-  }}>
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: '16px',
-              width: 64,
-              height: 64,
-            }}
-          />
+      <Layout   style={{background:'transparent'}} >
 
-          <Flex align='center' gap={0}>
-
-
-
-               <Button className="sidebar-btn"  size="medium">Primary</Button>
-               <Button  className="sidebar-btn" size="medium">Primary</Button>
-               <Button  className="sidebar-btn" size="medium">Primary</Button>
-               <Button  className="sidebar-btn" size="medium">Primary</Button>
-          </Flex>
-
-
-          <Flex align='center' gap={2}>
-            <Button className="sidebar-btn" size="medium"  icon={<SearchOutlined />} />
-            <Badge dot offset={[-7, 4]}>
-                <BellOutlined size={2}  style={{ fontSize: '24px', color: '#000' }} />
-            </Badge>
-            <Avatar shape="square"   icon={<UserOutlined />} />
-          </Flex>
-
-
-        </Header>
         <Content
           style={{
-            margin: '24px 16px',
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
+            margin: '16px 32px',
+            minHeight: '100dvh',
+            background: 'transparent',
+            display:'flex',
+            flexDirection:'column',
+            gap:"20px"
+
           }}
         >
-          Content
+   <Row align="middle">
+  {/* CENTER COLUMN */}
+  <Col sm={0} xs={0} md={24} flex="auto">
+    <Flex align="center" justify="center">
+      <Button className="sidebar-btn" size="medium">Primary</Button>
+      <Button className="sidebar-btn" size="medium">Primary</Button>
+      <Button className="sidebar-btn" size="medium">Primary</Button>
+      <Button className="sidebar-btn" size="medium">Primary</Button>
+    </Flex>
+  </Col>
+
+  {/* RIGHT COLUMN */}
+  <Col>
+    <Flex align="center" gap={1}>
+      <Button className="sidebar-btn" size="medium" icon={<SearchOutlined />} />
+      <Badge dot offset={[-7, 4]}>
+        <BellOutlined style={{ fontSize: 24 }} />
+      </Badge>
+      <Avatar shape="square" icon={<UserOutlined />} />
+    </Flex>
+  </Col>
+</Row>
 
 
  <Row gutter={[16, 16]}>
       {/* LEFT – spans 2 rows on desktop, full width on mobile */}
-      <Col sm={24}  md={8}>
-      <Card style={{ backgroundColor: 'red',minWidth:300 , padding: 0,borderRadius:17 }}>
+      <Col sm={24} lg={8} md={24}>
+      <Card style={{ minWidth:300 , padding: 0,borderRadius:17 }}>
       <Flex   vertical gap={15}>
         {/* Header */}
         <Flex align="center" style={{ width: '100%' }} justify="space-between">
@@ -210,7 +231,7 @@ const App = () => {
             width: '100%',
             borderRadius: '100vmax',
             overflow: 'hidden',
-            backgroundColor: '#fff', // search bar background
+            backgroundColor: '#cac6c6', // search bar background
           }}
         >
           <Input
@@ -220,6 +241,7 @@ const App = () => {
               flex: 1,
               padding: '8px 12px',
               borderRadius: 0,
+                   backgroundColor: '#cac6c6'
             }}
           />
         
@@ -273,8 +295,8 @@ const App = () => {
 
 
                 <div>
-                    <Avatar  shape='square'/>
-                    <Avatar shape='square'/>
+                    <Avatar src={av1} shape='square'/>
+                    <Avatar src={av2} shape='square'/>
                 </div>
             </Flex>
 
@@ -313,8 +335,8 @@ const App = () => {
 
 
                 <div>
-                    <Avatar  shape='square'/>
-                    <Avatar shape='square'/>
+                    <Avatar src={av1} shape='square'/>
+                    <Avatar src={av2} shape='square'/>
                 </div>
             </Flex>
 
@@ -353,8 +375,10 @@ const App = () => {
 
 
                 <div>
-                    <Avatar  shape='square'/>
-                    <Avatar shape='square'/>
+
+
+                    <Avatar src={av1} shape='square'/>
+                    <Avatar src={av2} shape='square'/>
                 </div>
             </Flex>
 
@@ -368,11 +392,12 @@ const App = () => {
       </Col>
 
       {/* RIGHT */}
-      <Col xs={24} md={16}>
+      <Col xs={24} lg={16} md={24}>
         <Row gutter={[16, 16]}>
           <Col xs={24} md={24}>
-          
-                  <Card title="Weekly Performance">
+   
+
+         <Card title="Weekly Performance">
         <Line {...config} />
       </Card>
           
@@ -380,7 +405,7 @@ const App = () => {
 
           
 
-          <Col xs={24} md={12}>
+          <Col xs={24} lg={12} md={24}>
           
  
 
@@ -458,9 +483,10 @@ const App = () => {
 
 
           </Col>
-          <Col xs={24} md={12} sm={24}>
+          <Col xs={24} md={24} lg={12} sm={24}>
           
   
+
 <Card
   bodyStyle={{
     display: "flex",
@@ -542,3 +568,5 @@ const App = () => {
   );
 };
 export default App;
+
+

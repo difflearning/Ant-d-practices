@@ -1,0 +1,10 @@
+.sidebar-btn {
+  color: rgb(255, 255, 255) !important;
+  background-color: rgb(97, 97, 97) !important;
+  border: none !important;
+}
+
+.sidebar-btn:hover {
+  color: white !important;
+  background-color: rgb(22, 22, 22) !important;
+}

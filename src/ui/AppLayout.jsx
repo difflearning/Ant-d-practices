@@ -165,8 +165,8 @@ const App = () => {
 
     {/* 🌙 Bottom actions */}
     <Flex vertical gap={0} align="center">
-      <Button size="large" icon={<SunOutlined />} />
-      <Button size="large" icon={<MoonOutlined />} />
+      <Button className="sidebar-btn" size="large" icon={<SunOutlined />} />
+      <Button className="sidebar-btn" size="large" icon={<MoonOutlined />} />
     </Flex>
   </Flex>
 
@@ -234,7 +234,7 @@ const App = () => {
             <h2 style={{ margin: 0 }}>Select A Course</h2>
             <p style={{ margin: '4px 0 0 0' }}>Start Learning today</p>
           </div>
-          <Button size="large" icon={<FullscreenOutlined />} />
+          <Button className="sidebar-btn" size="large" icon={<FullscreenOutlined />} />
         </Flex>
 
         {/* Search bar container (no Card) */}

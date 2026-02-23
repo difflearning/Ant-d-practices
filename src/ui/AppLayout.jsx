@@ -127,7 +127,10 @@ const App = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
   return (
-    <Layout  style={{minHeight:'100dvh',  background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"}} >
+    <Layout  style={{minHeight:'100dvh',   background:"radial-gradient(circle,rgba(231, 244, 249, 1) 0%, rgba(235, 239, 242, 1) 40%, rgba(245, 225, 222, 1) 69%, rgba(220, 213, 240, 1) 94%)"     }} >
+
+
+
 
 
 <Sider
@@ -153,11 +156,11 @@ const App = () => {
     {/* 📌 Main icons */}
     <Flex  vertical gap={0} align="center">
       <Button size="large"   type='text' icon={<HomeOutlined />} className="sidebar-btn" />
-      <Button size="large"  icon={<DownloadOutlined />} />
-      <Button size="large"  icon={<MailOutlined />} />
-      <Button size="large"  icon={<FolderOpenOutlined />} />
-      <Button size="large" icon={<ScheduleOutlined />} />
-      <Button size="large" icon={<PieChartOutlined />} />
+      <Button size="large"  icon={<DownloadOutlined />}  className="sidebar-btn"/>
+      <Button size="large" className="sidebar-btn"  icon={<MailOutlined />} />
+      <Button size="large" className="sidebar-btn"  icon={<FolderOpenOutlined />} />
+      <Button size="large" className="sidebar-btn" icon={<ScheduleOutlined />} />
+      <Button size="large" className="sidebar-btn" icon={<PieChartOutlined />} />
     </Flex>
 
     {/* 🌙 Bottom actions */}
@@ -189,21 +192,32 @@ const App = () => {
   {/* CENTER COLUMN */}
   <Col sm={0} xs={0} md={24} flex="auto">
     <Flex align="center" justify="center">
-      <Button className="sidebar-btn" size="medium">Primary</Button>
-      <Button className="sidebar-btn" size="medium">Primary</Button>
-      <Button className="sidebar-btn" size="medium">Primary</Button>
-      <Button className="sidebar-btn" size="medium">Primary</Button>
+      <Button className="topbar-btn" size="medium">Primary</Button>
+      <Button className="topbar-btn" size="medium">Primary</Button>
+      <Button className="topbar-btn" size="medium">Primary</Button>
+      <Button className="topbar-btn" size="medium">Primary</Button>
     </Flex>
   </Col>
 
   {/* RIGHT COLUMN */}
   <Col>
-    <Flex align="center" gap={1}>
-      <Button className="sidebar-btn" size="medium" icon={<SearchOutlined />} />
-      <Badge dot offset={[-7, 4]}>
-        <BellOutlined style={{ fontSize: 24 }} />
+    <Flex align="center" gap={1} >
+      <Button className="sidebar-btn" size="medium" icon={<SearchOutlined style={{ fontSize: 20 }} />} />
+      <Badge   dot offset={[-9, 7]}>
+
+         <span
+    style={{
+      background: "#fff",
+      borderRadius:'7px',
+      padding: 4,
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+  >
+        <BellOutlined style={{ fontSize: 24 }} /></span>
       </Badge>
-      <Avatar shape="square" icon={<UserOutlined />} />
+      <Avatar src={av2} shape="square" icon={<UserOutlined />} />
     </Flex>
   </Col>
 </Row>
@@ -397,7 +411,7 @@ const App = () => {
           <Col xs={24} md={24}>
    
 
-         <Card title="Weekly Performance">
+         <Card title="Weekly Performance"  style={{borderRadius:17}}>
         <Line {...config} />
       </Card>
           
@@ -415,7 +429,7 @@ const App = () => {
     flexDirection: "column",
     flex: 1,
     padding: 17,
-    border: "1px dashed green",
+
   }}
   style={{
     borderRadius: 17,
@@ -451,7 +465,19 @@ const App = () => {
     <Col flex={1}>
       <Space vertical size={0} style={{ width: "100%" }}>
         <p style={{ margin: 0 }}>Write 3 sentences with vocab</p>
-        <Progress percent={57} />
+       
+
+       
+
+<Progress
+  percent={57}
+  strokeWidth={10}
+  strokeColor={{
+
+    from: "#8fbedd",
+    to: "#85da54",
+  }}
+/>
       </Space>
     </Col>
   </Row>
@@ -462,7 +488,19 @@ const App = () => {
     <Col flex={1}>
       <Space direction="vertical" size={0} style={{ width: "100%" }}>
         <p style={{ margin: 0 }}>Write 3 sentences with vocab</p>
-        <Progress percent={42} />
+
+
+        
+
+<Progress
+  percent={42}
+  strokeWidth={10}
+  strokeColor={{
+
+    from: "#8fbedd",
+    to: "#85da54",
+  }}
+/>
       </Space>
     </Col>
   </Row>
@@ -473,7 +511,20 @@ const App = () => {
     <Col flex={1}>
       <Space direction="vertical" size={0} style={{ width: "100%" }}>
         <p style={{ margin: 0 }}>Write 3 sentences with vocab</p>
-        <Progress percent={31} />
+  
+
+
+
+
+<Progress
+  percent={30}
+  strokeWidth={10}
+  strokeColor={{
+
+    from: "#8fbedd",
+    to: "#85da54",
+  }}
+/>
       </Space>
     </Col>
   </Row>
@@ -493,7 +544,7 @@ const App = () => {
     flexDirection: "column",
     flex: 1,
     padding: 17,
-    border: "1px dashed green",
+
   }}
   style={{
     borderRadius: 17,
@@ -547,7 +598,7 @@ const App = () => {
         </Space>
       </Col>
       <Col>
-        <div style={{ border: "2px dashed green", padding: "4px 8px", textAlign: "center" }}>
+        <div style={{padding: "4px 8px", textAlign: "center" }}>
           <span className="rank">{friend.score.toLocaleString()}</span>
         </div>
       </Col>

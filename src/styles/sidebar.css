@@ -1,10 +1,28 @@
 .sidebar-btn {
-  color: rgb(255, 255, 255) !important;
-  background-color: rgb(97, 97, 97) !important;
+  color: rgb(0, 0, 0) !important;
+  background-color: rgb(255, 255, 255) !important;
   border: none !important;
+
 }
 
 .sidebar-btn:hover {
+  color: white !important;
+  background-color: rgb(22, 22, 22) !important;
+}
+
+
+.topbar-btn{
+
+    color: rgb(0, 0, 0) !important;
+  background-color: rgb(255, 255, 255) !important;
+  border: none !important;
+
+  padding: 1.5rem 1.5rem;
+
+}
+
+
+.topbar-btn:hover {
   color: white !important;
   background-color: rgb(22, 22, 22) !important;
 }
